@@ -66,7 +66,29 @@ public class AgenciaTalentos {
         return sb.toString();
     }
 
+    private int buscarIndiceCliente(int id){
+        int indice = -1;
+        for (int i = 0 ; i < MAX_CLIENTES; i++){
+            if (clientes[i] != null && clientes[i].getId() == id){
+                indice = i;
+            }
+        }
+        return indice;
+    }
 
+    public Cliente eliminarCliente(int idCLiente){
+        Cliente clienteEliminado = null;
+        int indiceCliente;
+
+        indiceCliente = buscarIndiceCliente(idCLiente);
+
+        if (indiceCliente != -1){
+            clienteEliminado = clientes[indiceCliente];
+            clientes[indiceCliente] = null;
+            numeroClientes--;
+        }
+        return clienteEliminado;
+    }
 
     public int contarClientes(){
         int contadorClientes = 0 ;

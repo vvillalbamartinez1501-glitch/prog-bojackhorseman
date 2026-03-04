@@ -6,7 +6,7 @@ public class Cliente {
     private static int siguienteId = 0;
 
     public Cliente (String nombre, String profesion, int numeroEscenariosPublicos){
-        this.id = siguienteId++;
+        this.id = ++siguienteId;
         this.nombre = nombre;
         this.profesion = profesion;
         this.numeroEscenariosPublicos = numeroEscenariosPublicos;
@@ -40,6 +40,7 @@ public class Cliente {
         sb.append(profesion);
         sb.append(", número de escándalos públicos:");
         sb.append(numeroEscenariosPublicos);
+        sb.append("\n");
         return sb.toString();
     }
 }

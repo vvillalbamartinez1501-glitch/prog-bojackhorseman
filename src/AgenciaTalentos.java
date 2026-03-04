@@ -40,18 +40,16 @@ public class AgenciaTalentos {
 
     public boolean registrarCliente(Cliente cliente){
         boolean clienteRegistradoCorrectamente = false;
-        int primerHuecoLibre = 0;
+        int primerHuecoLibre;
         if (buscarCliente(cliente.getId()) == null){
             clienteRegistradoCorrectamente = true;
         }
         if (clienteRegistradoCorrectamente){
             primerHuecoLibre = buscarPrimerHuecoLibre();
-        }
-        if (primerHuecoLibre != -1){
-            clientes[primerHuecoLibre] = cliente;
-            numeroClientes++;
-        } else {
-            clienteRegistradoCorrectamente = false;
+            if (primerHuecoLibre != -1){
+                clientes[primerHuecoLibre] = cliente;
+                numeroClientes++;
+            }
         }
         return  clienteRegistradoCorrectamente;
     }
@@ -88,6 +86,24 @@ public class AgenciaTalentos {
             numeroClientes--;
         }
         return clienteEliminado;
+    }
+
+    public void ordenarClientes(){
+        Cliente clienteTemporal;
+        for (int i = 0 ; i < MAX_CLIENTES; i++){
+            for (int j = i +1; j < MAX_CLIENTES; j++){
+                if (clientes[i] == null){
+                    clienteTemporal = clientes[i];
+                    clientes[i] = clientes[j];
+                    clientes[j] = clienteTemporal;
+                } else if (clientes[j] != null && clientes[i].getId() > clientes[j].getId()){
+                    clienteTemporal = clientes[i];
+                    clientes[i] = clientes[j];
+                    clientes[j] = clienteTemporal;
+                }
+            }
+
+        }
     }
 
     public int contarClientes(){
